@@ -69,3 +69,21 @@
 		   (setf (prev (dlist-first ,dlist)) nil)))
 	     (data ,dlist-part-var))))))
 
+(defun dlist-delete-dcons (dlist dcons)
+  "Destructively modifies dlist by deleting dcons given. If dcons is not at extreme positions in the list, does not check that dcons to be deleted belongs to the list. Returns dcons"
+  (assert dlist)
+  (assert dcons)
+  (let ((p (prev dcons))
+        (n (next dcons)))
+    (cond
+     ((null p)
+      (assert (eq dcons (%dlist-first dlist)))
+      (dlist-pop dlist))
+     ((null n)
+      (assert (eq dcons (%dlist-last dlist)))
+      (dlist-pop dlist :from-end t))
+     (t ; in the middle of the list
+      (setf
+       (dcons-next p) n
+       (dcons-prev n) p)
+      dcons))))

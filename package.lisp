@@ -54,6 +54,7 @@
    #:copy-dlist
    #:in-dlist
    #:on-dlist
+   #:dlist-delete-dcons
    ))
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
