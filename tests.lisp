@@ -147,6 +147,39 @@
   (let ((dlist (dlist 1 2 3)))
     (assert-false (eql dlist (copy-dlist dlist)))))
 
+(define-test delete-dlist-from-empty-list
+  (let ((dlist (dlist)))
+    (assert-error 'error (dlist-delete-dcons dlist (dcons t t t)))
+    ))
+
+(define-test delete-dlist-from-empty-list
+  (let ((dlist (dlist)))
+    (assert-error 'error (dlist-delete-dcons dlist (dcons t t t)))
+    ))
+
+(define-test delete-dlist-from-the-start-of-non-empty-list
+  (let* ((dlist (dlist 1 2))
+         (x (dlist-first dlist))
+         (xx (dlist-delete-dcons dlist x)))
+    (print (list dlist x xx))
+    (assert-eq x xx)
+    (assert-equalp (dlist->list dlist) '(2))))
+
+(define-test delete-dlist-from-the-end-of-non-empty-list
+  (let* ((dlist (dlist 1 2))
+         (x (nthdcons 1 dlist))
+         (xx (dlist-delete-dcons dlist x)))
+    (assert-eq x xx)
+    (assert-equalp (dlist->list dlist) '(1))))
+
+(define-test delete-dlist-from-the-middle-of-non-empty-list
+  (let* ((dlist (dlist 1 2 3))
+         (x (next (dlist-first dlist)))
+         (xx (dlist-delete-dcons dlist x)))
+    (assert-eq x xx)
+    (assert-equalp (dlist->list dlist) '(1 3))))
+
+
 #+generic-sequences
 (define-test generic-seqs
   (assert-equality 

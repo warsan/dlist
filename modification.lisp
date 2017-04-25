@@ -85,5 +85,5 @@
      (t ; in the middle of the list
       (setf
        (dcons-next p) n
-       (dcons-prev n) p)
-      dcons))))
+       (dcons-prev n) p)))
+    dcons))
