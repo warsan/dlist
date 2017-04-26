@@ -1,4 +1,4 @@
-dlist - A Common Lisp library that implements doubly-linked lists
+dlist - реализация двухсвязных списков на Common Lisp
 =================================================================
 
 dlist is a Common Lisp library that implements the doubly-linked list
@@ -10,12 +10,17 @@ currently), you will be able to use the standard Common Lisp sequence
 functions (map, reduce, etc.) with dlists. dlist does not have any
 dependencies other than a common lisp implementation.
 
+О данном коде
+---------------
+Данный код - это форк оригинальной библиотеки dlist ([http://github.com/krzysz00/dlist](GitHub)). Оригинальная библиотека доступна через Quicklisp. Недостатком оригинала является явный дефицит функций, например, нельзя удалить элемент из списка или вставить элемент в список. Форк зависит от [https://bitbucket.org/budden/budden-tools](budden-tools), которая тоже недоступна через quicklisp (во всяком случае, я ничего не делал для её доступности).
+
+Частичная русификация
+----------------------
+Новый код и документация частично русифицированы. 
+
 Obtaining and installing dlist
 ------------------------------
-
-dlist is available from [http://github.com/krzysz00/dlist](GitHub) and can be
-installed via Quicklisp (not yet). To use dlist, simply load the ASDF
-system. Use:
+Всё как обычно для библиотек не под quicklisp. Use:
 
     (asdf:oos 'asdf:test-op :dlist)
 
@@ -26,9 +31,10 @@ for details.
 
 Contact Information
 -------------------
+Пишите на github. 
 
-You can reach the author (Krzysztof Drewniak) at
-<krzysdrewniak@gmail.com>. If you find any bugs, please report them at
-dlist's GitHub issue tracker. 
+Что надо исправить
+-------------------
+Изменить название
 
 [1]: http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.65.1604&rep=rep1&type=pdf
