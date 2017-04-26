@@ -1,4 +1,5 @@
 ;; Copyright (c) 2011-2012, Krzysztof Drewniak
+;; Copyright (c) 2017, Денис Будяк
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without
@@ -31,6 +32,7 @@
   :author "Krzyszxtof Drewniak <krzysdrewniak@gmail.com>"
   :license "3-Clause BSD"
   :description "An implementation of the doubly-linked list in Common Lisp."
+  :depends-on (:budden-tools)
   :in-order-to ((test-op (test-op #:dlist-test)))
   :serial t
   :components ((:file "package")

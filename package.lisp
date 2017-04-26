@@ -1,3 +1,4 @@
+;; -*- system :dlist; -*- 
 ;; Copyright (c) 2011-2012, Krzysztof Drewniak
 ;; All rights reserved.
 
@@ -24,7 +25,7 @@
 ;; SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 (defpackage #:dlist
-  (:use #:cl)
+  (:use #:cl :budden-tools)
   (:export
    #:dcons
    #:dlist
@@ -55,6 +56,8 @@
    #:in-dlist
    #:on-dlist
    #:dlist-delete-dcons
+   #:dlist-insert-before
+   #:|DLIST--Вставить-с-сохранением-порядка|
    ))
 
 (eval-when (:compile-toplevel :load-toplevel :execute)

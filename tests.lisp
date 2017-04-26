@@ -1,3 +1,4 @@
+;; -*- system :dlist-test; -*- 
 ;; Copyright (c) 2011-2012, Krzysztof Drewniak
 ;; All rights reserved.
 
@@ -161,7 +162,6 @@
   (let* ((dlist (dlist 1 2))
          (x (dlist-first dlist))
          (xx (dlist-delete-dcons dlist x)))
-    (print (list dlist x xx))
     (assert-eq x xx)
     (assert-equalp (dlist->list dlist) '(2))))
 
@@ -179,6 +179,33 @@
     (assert-eq x xx)
     (assert-equalp (dlist->list dlist) '(1 3))))
 
+
+(defun |TEST--DLIST--Вставить-в-с-сохранением-порядка-aux-fn| ()
+  (perga
+   (let ОБРАЗЕЦ '(0 1 2 3 4))
+   (let dlist (apply 'dlist ОБРАЗЕЦ))
+   (let ОШИБКИ nil)
+   (dolist (ГДЕ-ВЫРЕЗАТЬ '(0 1 2 3 4))
+     (dolist (ГДЕ-ВСТАВИТЬ '(nil 0 1 2 3))
+       (let Э (dlist-delete-dcons dlist (nthdcons ГДЕ-ВЫРЕЗАТЬ dlist)))
+       (let М (if ГДЕ-ВСТАВИТЬ (nthdcons ГДЕ-ВСТАВИТЬ dlist) nil))
+       (|DLIST--Вставить-с-сохранением-порядка|
+        (data Э)
+        dlist
+        :|Место-рядом| М)
+       (unless (equal (dlist->list dlist) ОБРАЗЕЦ)
+         (push `(:ГДЕ-ВЫРЕЗАТЬ ,ГДЕ-ВЫРЕЗАТЬ
+                               :ГДЕ-ВСТАВИТЬ ,ГДЕ-ВСТАВИТЬ
+                               :ЧТО-ПОЛУЧИЛОСЬ ,(dlist->list dlist))
+               ОШИБКИ)
+         (return))))
+   ОШИБКИ))
+
+(define-test |TEST--DLIST--Вставить-в-с-сохранением-порядка|
+  (let ((ОШИБКИ (|TEST--DLIST--Вставить-в-с-сохранением-порядка-aux-fn|)))
+    (when ОШИБКИ
+      (print ОШИБКИ))
+    (assert-eq ОШИБКИ nil)))
 
 #+generic-sequences
 (define-test generic-seqs

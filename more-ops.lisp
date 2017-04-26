@@ -1,3 +1,4 @@
+;; -*- system :dlist; -*- 
 ;; Copyright (c) 2011-2012, Krzysztof Drewniak
 ;; All rights reserved.
 

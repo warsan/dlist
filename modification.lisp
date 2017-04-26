@@ -1,3 +1,4 @@
+;; -*- system :dlist; -*- 
 ;; Copyright (c) 2011-2012, Krzysztof Drewniak
 ;; All rights reserved.
 
@@ -34,7 +35,7 @@
 		    (dlist-last dlist1) (dlist-last dlist2)) dlist1) dlists))
 
 (defmacro dlist-push (obj dlist &key at-end)
-  "Pushes `obj' onto `dlist'. If `at-end' is not-nil, the element is added to the end of dlist, otherwise it is added to the begining."
+  "Pushes `obj' onto `dlist'. If `at-end' is not-nil, the element is added to the end of dlist, otherwise it is added to the begining. Возвращает dlist"
   (let ((obj-var (gensym)) (dlist-var (gensym)) (dlist-part-var (gensym)) (at-end-var (gensym)))
     `(let ((,at-end-var ,at-end) (,obj-var ,obj) (,dlist-var ,dlist))
        (if ,at-end-var
@@ -87,3 +88,53 @@
        (dcons-next p) n
        (dcons-prev n) p)))
     dcons))
+
+(defun dlist-insert-before (dlist at data)
+  "Creates new dcons containing data and inserts into before 'at' dcons in dlist. UNTESTED!"
+  (let ((p (prev at)))
+    (cond
+     ((null p) ; we are at the beginning of list
+      (dlist-push data dlist))
+     (t
+      (let ((result (dcons p data at)))
+        (setf (next p) result)
+        (setf (prev at) result)
+        result)))))
+
+
+(defun |DLIST--Вставить-с-сохранением-порядка| (|Данные| DLIST &key |Место-рядом| (|Предикат| #'<) (|Ключ| #'identity))
+  "Утилита общего назначения для DLIST. Возвращает dcons"
+  (perga
+   (let М (or |Место-рядом| (dlist-first DLIST)))
+   (flet Меньше (А Б) (funcall |Предикат| (funcall Ключ А) (funcall Ключ Б)))
+   (let Направление 0) ; в какую сторону идём для поиска значения?
+   (loop
+     (cond
+      ((null М)
+       (dlist-push |Данные| DLIST :at-end (= Направление 1))
+       (return
+        (nthdcons 0 DLIST :from-end (= Направление 1))))
+      ((Меньше |Данные| (data М))
+       ;; может быть, можно ставить перед М, а может быть, нужно вставить ещё раньше.
+       ;; Попробуем пойти налево и посмотрим.
+       (ecase Направление
+         (1 ; шли вправо, значит, предыдущий элемент меньше нашего, а этот больше - вставляем перед М
+          (return (dlist-insert-before DLIST М |Данные|)))
+         (0 ; никуда не шли - теперь пойдём налево
+          (setf Направление -1)
+          (setf М (prev М)))
+         (-1 ; шли налево, значит, пойдём дальше
+          (setf М (prev М)))))
+      ((Меньше (data М) |Данные|)
+       ;; может быть, можно вставить после М, а может быть, ещё правее.
+       ;; сходим направо и посмотрим
+       (ecase Направление
+         (-1 ; шли налево - значит, следующий от М больше вставляемого и можно вставлять
+          (return (dlist-insert-before DLIST (next М) |Данные|)))
+         (0 ; никуда не шли - так пойдём
+          (setf Направление 1)
+          (setf М (next М)))
+         (1 ; шли направо - значит пойдём дальше
+          (setf М (next М)))))
+      (t ; элементы равны - вставляем где попало
+       (return (dlist-insert-before DLIST М |Данные|)))))))
