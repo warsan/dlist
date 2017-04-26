@@ -1,5 +1,0 @@
-@findex make-dlist
-@anchor{Function make-dlist}
-@deffn {Function} {make-dlist} size @&key initial-element
-Creates a dlist that contains `initial-element' `size' times.
-@end deffn

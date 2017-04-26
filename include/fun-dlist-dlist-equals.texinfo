@@ -1,5 +1,0 @@
-@findex dlist=
-@anchor{Function dlist=}
-@deffn {Function} {dlist=} dlist @&rest more-dlists
-Tests dlists for equality by element, recursively descending into sub-dlists.
-@end deffn
