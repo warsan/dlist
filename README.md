@@ -3,8 +3,7 @@ dlist - реализация двухсвязных списков на Common L
 
 dlist is a Common Lisp library that implements the doubly-linked list
 data structure. dlist provides many operations on doubly-linked lists,
-or dlists, which are documented in the file documentation.html , which
-is available with the source. If your lisp implementation supports
+or dlists. If your lisp implementation supports
 [user-extensible sequences][1] (which only SBCL and ABCL do
 currently), you will be able to use the standard Common Lisp sequence
 functions (map, reduce, etc.) with dlists. dlist does not have any
