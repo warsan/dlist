@@ -9,6 +9,14 @@ is available with the source. If your lisp implementation supports
 currently), you will be able to use the standard Common Lisp sequence
 functions (map, reduce, etc.) with dlists. dlist does not have any
 dependencies other than a common lisp implementation.
+Перевод:
+========
+
+dlist - это общая библиотека Lisp, которая реализует структуру данных с двойной связью. 
+dlist предоставляет много операций над двусвязными списками или dlists, которые задокументированы в файле documentation.html и доступны с источником. 
+Если ваша реализация lisp поддерживает 8 [пользовательские последовательности][1] 
+Если ваша реализация lisp поддерживает расширяемые [пользовательские последовательности][1] (которые в настоящее время делают только SBCL и ABCL), вы сможете использовать стандартные функции последовательности Lisp (map, reduce и т. Д.) 
+С помощью dlists. dlist не имеет никаких зависимостей, кроме общей реализации lisp.
 
 О данном коде
 ---------------
