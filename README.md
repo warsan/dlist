@@ -1,5 +1,15 @@
 dlist - реализация двухсвязных списков на Common Lisp
 =================================================================
+dlist - это библиотека Common Lisp, которая реализует структуру двусвязного списка  
+data. dlist предоставляет множество операций над двусвязными списками,  
+или dlists, которые описаны в файле documents.html, который  
+доступен вместе с источником.  
+Если ваша реализация lisp поддерживает  
+[расширяемые пользователем последовательности][1]  
+(в настоящее время только SBCL и ABCL выполняют),  
+вы сможете использовать стандартные функции Common Lisp sequence  
+(map, lower, и т.д.) со списками.  
+У dlist нет никаких зависимостей, кроме обычной реализации lisp.  
 
 dlist is a Common Lisp library that implements the doubly-linked list
 data structure. dlist provides many operations on doubly-linked lists,
