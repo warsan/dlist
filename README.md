@@ -20,6 +20,8 @@ dependencies other than a common lisp implementation.
 
 Obtaining and installing dlist
 ------------------------------
+Получение и установка dlist
+---------------------------
 Всё как обычно для библиотек не под quicklisp. Use:
 
     (asdf:oos 'asdf:test-op :dlist)
